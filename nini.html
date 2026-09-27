@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>給最愛的林安妮 🌊 專屬甜蜜陪伴約定 🏝️</title>
+
+  <!-- Google Fonts: Retro Pixel & Cute Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+TC:wght@500;700;900&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    * {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      /* Maldives Cyan-Turquoise to Warm White Sand */
+      background: linear-gradient(180deg, #0284c7 0%, #06b6d4 25%, #2dd4bf 55%, #e0f2fe 80%, #fffbeb 92%, #fef3c7 100%);
+      color: #0f172a;
+      min-height: 100vh;
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pixel-font {
+      font-family: 'Press Start 2P', monospace, cursive;
+    }
+
+    .cute-font {
+      font-family: 'ZCOOL KuaiLe', 'Noto Sans TC', sans-serif;
+    }
+
+    /* Mobile Container Wrapper */
+    .mobile-screen-wrapper {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      padding: 14px 16px 110px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Maldives White Sand Pixel Box */
+    .pixel-box {
+      background-color: rgba(255, 255, 255, 0.96);
+      border: 3.5px solid #0284c7;
+      box-shadow: 
+        inset -4px -4px 0px 0px #bae6fd,
+        inset 4px 4px 0px 0px #ffffff,
+        0 6px 0px 0px #0369a1;
+      position: relative;
+      border-radius: 22px;
+    }
+
+    /* 3D Pixel Buttons */
+    .pixel-btn {
+      position: relative;
+      border: 3px solid #0369a1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      transition: all 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .pixel-btn-ocean {
+      background: linear-gradient(180deg, #14b8a6 0%, #0284c7 100%);
+      color: #ffffff;
+      text-shadow: 1px 1px 0 #075985;
+      box-shadow: 
+        inset 2px 2px 0px rgba(255,255,255,0.7),
+        inset -2px -2px 0px rgba(0,0,0,0.15),
+        0 5px 0px #0369a1;
+    }
+
+    .pixel-btn-ocean:active {
+      transform: translateY(4px) scale(0.98);
+      box-shadow: 0 1px 0px #0369a1;
+    }
+
+    .pixel-btn-sand {
+      background: #ffffff;
+      color: #0369a1;
+      box-shadow: 
+        inset 2px 2px 0px #ffffff,
+        inset -2px -2px 0px #e0f2fe,
+        0 5px 0px #0369a1;
+    }
+
+    .pixel-btn-sand:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0px #0369a1;
+    }
+
+    .pixel-btn-emerald {
+      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+      color: white;
+      box-shadow: 0 5px 0px #065f46;
+      border-color: #065f46;
+    }
+
+    /* Interactive Companion Activity Card */
+    .activity-card {
+      background: #ffffff;
+      border: 2.5px solid #7dd3fc;
+      box-shadow: 0 4px 0px #0284c7;
+      transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+      cursor: pointer;
+    }
+
+    .activity-card.selected {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      transform: translateY(2px);
+      box-shadow: 
+        inset 0 0 0 2px #0ea5e9,
+        0 2px 0px #0369a1;
+    }
+
+    /* Floating Motion */
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(1deg); }
+    }
+
+    .floating-anim {
+      animation: gentleFloat 3.2s infinite ease-in-out;
+    }
+
+    /* Begging Paws Movement */
+    @keyframes puppyBegMotion {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .begging-paws {
+      animation: puppyBegMotion 0.8s infinite ease-in-out;
+      transform-origin: center bottom;
+    }
+
+    /* Tail Wagging */
+    @keyframes tailWagMotion {
+      0%, 100% { transform: rotate(-10deg); }
+      50% { transform: rotate(14deg); }
+    }
+
+    .puppy-tail {
+      animation: tailWagMotion 0.5s infinite ease-in-out;
+      transform-origin: 22px 64px;
+    }
+
+    /* Maldives Shorelines */
+    .maldives-beach-waves {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      pointer-events: none;
+      z-index: 1;
+      background-repeat: repeat-x;
+      background-size: 340px 90px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="340" height="90" viewBox="0 0 340 90"><path fill="%23fef3c7" d="M0,90 L340,90 L340,40 C290,28 260,56 215,44 C170,32 140,58 95,44 C55,32 30,50 0,40 Z"/><path fill="%23ffffff" fill-opacity="0.65" d="M0,40 C30,50 55,32 95,44 C140,58 170,32 215,44 C260,56 290,28 340,40 L340,46 C290,34 260,62 215,50 C170,38 140,64 95,50 C55,38 30,56 0,46 Z"/></svg>');
+    }
+
+    /* Subtle Scanlines */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(rgba(255, 255, 255, 0) 50%, rgba(2, 132, 199, 0.03) 50%);
+      background-size: 100% 4px;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Corner Daughter Secret Tag */
+    .secret-daughter-tag {
+      position: fixed;
+      bottom: 16px;
+      right: 14px;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      border: 2px dashed #0284c7;
+      box-shadow: 0 4px 0 #0369a1;
+      border-radius: 9999px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+      color: #0369a1;
+      animation: gentleFloat 2.8s infinite ease-in-out;
+      backdrop-filter: blur(4px);
+    }
+
+    .secret-daughter-tag:active {
+      transform: scale(0.92);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Retro Scanline Effect -->
+  <div class="scanlines"></div>
+
+  <!-- Ocean Bubble Canvas -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Top Status Bar -->
+  <header class="w-full max-w-[430px] px-3 pt-3 flex items-center justify-between z-30">
+    <div class="bg-white/95 border-2 border-[#0369a1] rounded-full px-3 py-1 shadow-sm text-xs font-black text-sky-900 flex items-center gap-1.5">
+      <span class="text-sm">👑</span>
+      <span>女王：林安妮 🌊 專屬預約席</span>
+    </div>
+
+    <!-- Sound Toggle -->
+    <button id="soundToggle" onclick="toggleAudio()" class="bg-white/95 border-2 border-[#0369a1] rounded-full px-3 py-1 shadow-sm text-xs font-bold text-sky-900 flex items-center gap-1 active:scale-90 transition-transform">
+      <span id="soundIcon">🔊</span>
+      <span id="soundText" class="pixel-font text-[9px]">SFX ON</span>
+    </button>
+  </header>
+
+  <div class="mobile-screen-wrapper">
+
+    <!-- ============================================ -->
+    <!-- STEP 1: Cute Begging Puppy Apology           -->
+    <!-- ============================================ -->
+    <section id="step1" class="w-full flex flex-col items-center text-center transition-all duration-300">
+      
+      <!-- Top Subtitle Tag -->
+      <div class="mb-2 mt-1">
+        <span class="inline-block bg-[#0284c7] text-white text-[10px] pixel-font px-3.5 py-1 rounded-full border-2 border-[#0369a1] shadow">
+          SPECIAL PUPPY FOR ANNIE 🐾
+        </span>
+      </div>
+
+      <!-- Mascot Card: Clean, Ultra-Cute Fluffy Begging Puppy (No bow, no flowers) -->
+      <div onclick="puppyTapped()" class="pixel-box p-3 mb-3 bg-white floating-anim inline-block relative cursor-pointer active:scale-95 transition-transform" title="點我摸摸小狗！">
+        <div class="absolute -top-2.5 -right-2 bg-amber-300 text-amber-950 font-black text-[9px] px-2 py-0.5 rounded-full border border-amber-600 shadow animate-bounce">
+          摸摸小狗 🐶
+        </div>
+
+        <!-- Super Adorable Pure Puppy SVG with Begging Paws & Wagging Tail -->
+        <svg class="w-36 h-36 mx-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Wagging Tail -->
+          <g class="puppy-tail">
+            <path d="M24,62 C16,56 12,44 19,38 C25,33 30,42 27,52" fill="#d97706" stroke="#451a03" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M22,58 C16,52 14,44 20,40" fill="#fef3c7"/>
+          </g>
+
+          <!-- Soft Floppy Puppy Ears -->
+          <!-- Left Ear -->
+          <path d="M22,34 C12,38 10,56 17,66 C23,73 28,68 28,58 C28,47 26,38 22,34 Z" fill="#b45309" stroke="#451a03" stroke-width="2.5"/>
+          <ellipse cx="20" cy="54" rx="4" ry="9" fill="#fde68a" opacity="0.6"/>
+
+          <!-- Right Ear -->
+          <path d="M78,34 C88,38 90,56 83,66 C77,73 72,68 72,58 C72,47 74,38 78,34 Z" fill="#b45309" stroke="#451a03" stroke-width="2.5"/>
+          <ellipse cx="80" cy="54" rx="4" ry="9" fill="#fde68a" opacity="0.6"/>
+
+          <!-- Chubby Soft Body -->
+          <rect x="28" y="52" width="44" height="28" rx="14" fill="#fef3c7" stroke="#451a03" stroke-width="2.5"/>
+
+          <!-- Chubby Puppy Head -->
+          <rect x="22" y="22" width="56" height="48" rx="23" fill="#fef3c7" stroke="#451a03" stroke-width="2.8"/>
+
+          <!-- Cute Fluffy Head Patches (Warm golden-brown) -->
+          <path d="M24,34 C26,26 34,22 42,24 C36,30 32,38 30,44 C26,44 24,38 24,34 Z" fill="#d97706"/>
+          <path d="M76,34 C74,26 66,22 58,24 C64,30 68,38 70,44 C74,44 76,38 76,34 Z" fill="#d97706"/>
+
+          <!-- Rosy Soft Cheeks -->
+          <ellipse cx="30" cy="50" rx="5" ry="3.5" fill="#f43f5e" opacity="0.65"/>
+          <ellipse cx="70" cy="50" rx="5" ry="3.5" fill="#f43f5e" opacity="0.65"/>
+
+          <!-- Big Innocent Sparkling Eyes -->
+          <circle cx="37" cy="42" r="6" fill="#1e1b4b"/>
+          <circle cx="35" cy="40" r="2.4" fill="#ffffff"/>
+          <circle cx="38.5" cy="43.5" r="1.1" fill="#ffffff"/>
+
+          <circle cx="63" cy="42" r="6" fill="#1e1b4b"/>
+          <circle cx="61" cy="40" r="2.4" fill="#ffffff"/>
+          <circle cx="64.5" cy="43.5" r="1.1" fill="#ffffff"/>
+
+          <!-- Cute Pleading Tears -->
+          <polygon points="28,44 31,41 31,46" fill="#38bdf8"/>
+          <polygon points="72,44 69,41 69,46" fill="#38bdf8"/>
+
+          <!-- Shiny Black Nose -->
+          <ellipse cx="50" cy="47" rx="3.5" ry="2.6" fill="#1e1b4b"/>
+          <ellipse cx="49" cy="46" rx="1" ry="0.6" fill="#ffffff"/>
+
+          <!-- Cute W-shaped Mouth -->
+          <path d="M46,52 Q50,54.5 50,52 Q50,54.5 54,52" stroke="#451a03" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <ellipse cx="50" cy="55" rx="2.4" ry="1.6" fill="#fb7185"/>
+
+          <!-- Begging Paws Up Motion (合十求饒小肉球) -->
+          <g class="begging-paws">
+            <!-- Left Paw -->
+            <ellipse cx="44" cy="65" rx="5.5" ry="7.5" fill="#ffffff" stroke="#451a03" stroke-width="2"/>
+            <circle cx="42" cy="63.5" r="0.9" fill="#f43f5e"/>
+            <circle cx="44" cy="62.5" r="0.9" fill="#f43f5e"/>
+            <circle cx="46" cy="63.5" r="0.9" fill="#f43f5e"/>
+
+            <!-- Right Paw -->
+            <ellipse cx="56" cy="65" rx="5.5" ry="7.5" fill="#ffffff" stroke="#451a03" stroke-width="2"/>
+            <circle cx="54" cy="63.5" r="0.9" fill="#f43f5e"/>
+            <circle cx="56" cy="62.5" r="0.9" fill="#f43f5e"/>
+            <circle cx="58" cy="63.5" r="0.9" fill="#f43f5e"/>
+          </g>
+        </svg>
+
+        <div class="mt-1 text-[11px] text-sky-800 font-black tracking-widest pixel-font">
+          汪汪！🥺 PLEASE FORGIVE ME! 🥺
+        </div>
+      </div>
+
+      <!-- Dialogue: Natural, warm, and affectionate for Annie -->
+      <div class="px-2 mb-4 bg-white/85 backdrop-blur-sm p-3.5 rounded-2xl border-2 border-white shadow-sm">
+        <h1 class="text-2xl sm:text-3xl text-sky-950 font-black tracking-wide cute-font mb-1 leading-snug">
+          安妮，不要生氣了嘛 🥺🏝️
+        </h1>
+        <p class="text-xs sm:text-sm text-sky-900 font-bold leading-relaxed">
+          「妳最忠誠的小狗已經合十雙爪乖乖認錯了！」汪！🐶<br>
+          全世界最可愛的林安妮大人，<br>
+          今天隨妳吩咐差遣，能原諒我嗎？💖<br>
+          <span class="pixel-font text-[10px] text-sky-700 mt-1 inline-block">WILL YOU FORGIVE YOUR PUPPY?</span>
+        </p>
+      </div>
+
+      <!-- Runaway No / Expanding Yes Button Area -->
+      <div class="relative w-full max-w-xs min-h-[160px] flex items-center justify-center gap-4">
+        <!-- YES BUTTON -->
+        <button id="yesBtn" onclick="onYesClicked()" class="pixel-btn pixel-btn-ocean rounded-2xl text-base px-6 py-3.5 z-20 shadow-md">
+          YES 原諒你 🏝️
+        </button>
+
+        <!-- NO BUTTON (Runaway) -->
+        <button id="noBtn" class="pixel-btn pixel-btn-sand rounded-2xl text-xs px-4 py-3 z-20 font-bold whitespace-nowrap">
+          No 哼生氣 💢
+        </button>
+      </div>
+
+      <!-- Hint -->
+      <div class="mt-1 px-3 py-1.5 bg-white/90 border border-sky-300 rounded-lg text-[11px] text-sky-900 font-bold shadow-sm">
+        🌊 點點看「No」，看看小狗會躲去哪～
+      </div>
+
+    </section>
+
+    <!-- ============================================ -->
+    <!-- STEP 2: Sweet Companion Wishlist             -->
+    <!-- ============================================ -->
+    <section id="step2" class="w-full hidden flex-col items-center text-center transition-all duration-300">
+      
+      <!-- Mini Mascot Avatar -->
+      <div class="pixel-box p-2 mb-2 bg-white floating-anim inline-block relative max-w-[110px]">
+        <svg class="w-12 h-12 mx-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="20" cy="50" rx="6" ry="14" fill="#b45309"/>
+          <ellipse cx="80" cy="50" rx="6" ry="14" fill="#b45309"/>
+          <rect x="25" y="25" width="50" height="50" rx="22" fill="#fef3c7" stroke="#451a03" stroke-width="2"/>
+          <rect x="29" y="40" width="18" height="11" rx="3" fill="#0284c7" stroke="#0c4a6e" stroke-width="1.8"/>
+          <rect x="53" y="40" width="18" height="11" rx="3" fill="#0284c7" stroke="#0c4a6e" stroke-width="1.8"/>
+          <line x1="47" y1="45" x2="53" y2="45" stroke="#0c4a6e" stroke-width="1.8"/>
+          <ellipse cx="50" cy="57" rx="3" ry="2" fill="#1e1b4b"/>
+        </svg>
+        <span class="text-[8px] font-black text-sky-800 pixel-font block">FOR ANNIE</span>
+      </div>
+
+      <h2 class="text-base font-black text-sky-950 pixel-font mb-0.5 tracking-wider uppercase">
+        HOW SHOULD I ACCOMPANY ANNIE?
+      </h2>
+      <p class="text-xs text-sky-900 font-bold mb-3">
+        今天想怎麼陪林安妮？（可複選唷）：
+      </p>
+
+      <!-- 8 Sweet Romantic Activities -->
+      <div id="activityGrid" class="grid grid-cols-2 gap-2.5 w-full mb-3">
+        
+        <!-- 1: Sleep Call -->
+        <div class="activity-card rounded-xl p-2.5 flex flex-col items-center justify-center gap-1" data-id="sleep" onclick="toggleActivity(this)">
+          <span class="text-2xl">🌙📱</span>
+          <span class="pixel-font text-[9px] font-bold text-sky-900">SLEEP CALL</span>
+          <span class="text-[11px] text-gray-800 font-bold">連線開麥掛睡陪伴</span>
+        </div>
+
+        <!-- 2: Watch Party -->
+        <div class="activity-card rounded-xl p-2.5 flex flex-col items-center justify-center gap-1" data-id="movie" onclick="toggleActivity(this)">
+          <span class="text-2xl">🍿🎬</span>
+          <span class="pixel-font text-[9px] font-bold text-sky-900">WATCH PARTY</span>
+          <span class="text-[11px] text-gray-800 font-bold">視訊同步追劇看電影</span>
+        </div>
+
+        <!-- 3: Heartbeat Playlist (Replaced delivery) -->
+        <div class="activity-card rounded-xl p-2.5 flex flex-col items-center justify-center gap-1" data-id="playlist" onclick="toggleActivity(this)">
+          <span class="text-2xl">🎧🎵</span>
+          <span class="pixel-font text-[9px] font-bold text-sky-900">LOVE PLAYLIST</span>
+          <span class="text-[11px] text-gray-800 font-bold">一起聽專屬心動歌單</span>
+        </div>
+
+        <!-- 4: Virtual Mukbang & Chat -->
+        <div class="activity-card rounded-xl p-2.5 flex flex-col items-center justify-center gap-1" data-id="dinner" onclick="toggleActivity(this)">
+          <span class="text-2xl">🍜🥢</span>
+          <span class="pixel-font text-[9px] font-bold text-sky-900">VIRTUAL DINNER</span>
+          <span class="text-[11px] text-gray-800 font-bold">視訊連線吃飯聊心事</span>
+        </div>
+
+        <!-- 5: Maldives Trip Countdown -->
+        <div class="activity-card rounded-xl p-2.5 flex flex-col items-center justify-center gap-1" data-id="maldives" onclick="toggleActivity(this)">
+          <span class="text-2xl">🏖️✈️</span>
+          <span class="pixel-font text-[9px] font-bold text-sky-900">BEACH TRIP</span>
+          <span class="text-[11px] text-gray-800 font-bold">規劃馬爾地夫度假行</span>
+        </div>
+
+        <!-- 6: Funny Serenade -->
+        <div class="activity-card rounded-xl p-2.5 flex flex-col items-center justify-center gap-1" data-id="singing" onclick="toggleActivity(this)">
+          <span class="text-2xl">🎤😂</span>
+          <span class="pixel-font text-[9px] font-bold text-sky-900">FUNNY SERENADE</span>
+          <span class="text-[11px] text-gray-800 font-bold">唱走音爛歌逗妳開心</span>
+        </div>
+
+        <!-- 7: Co-op Gaming -->
+        <div class="activity-card rounded-xl p-2.5 flex flex-col items-center justify-center gap-1" data-id="gaming" onclick="toggleActivity(this)">
+          <span class="text-2xl">🎮✨</span>
+          <span class="pixel-font text-[9px] font-bold text-sky-900">CO-OP GAMING</span>
+          <span class="text-[11px] text-gray-800 font-bold">連線開黑玩雙人遊戲</span>
+        </div>
+
+        <!-- 8: Sweet Bedtime Story -->
+        <div class="activity-card rounded-xl p-2.5 flex flex-col items-center justify-center gap-1" data-id="bedtimestory" onclick="toggleActivity(this)">
+          <span class="text-2xl">📖🧸</span>
+          <span class="pixel-font text-[9px] font-bold text-sky-900">BEDTIME STORY</span>
+          <span class="text-[11px] text-gray-800 font-bold">睡前讀專屬故事哄妳睡</span>
+        </div>
+
+      </div>
+
+      <!-- Custom option field -->
+      <div class="w-full mb-3 text-left">
+        <input type="text" id="customActivityInput" placeholder="💡 想讓男友做別的？在此輸入..." class="w-full p-2 bg-white/95 border-2 border-[#38bdf8] rounded-xl text-xs font-bold text-sky-950 placeholder-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400">
+      </div>
+
+      <!-- Lock In Button -->
+      <button onclick="onLockInActivities()" class="pixel-btn pixel-btn-ocean rounded-xl py-3 px-8 text-xs font-bold tracking-wider shadow-md w-full max-w-[260px] flex items-center justify-center gap-2">
+        <span>LOCK IT IN</span>
+        <span>🔒</span>
+      </button>
+
+      <p id="selectionNotice" class="text-xs text-rose-700 font-bold mt-2 opacity-0 transition-opacity">
+        請安妮至少挑一個喜歡的陪伴方案嘛！🌊
+      </p>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- STEP 3: Schedule & Special Wish              -->
+    <!-- ============================================ -->
+    <section id="step3" class="w-full hidden flex-col items-center text-center transition-all duration-300">
+      
+      <div class="pixel-box rounded-2xl p-5 w-full bg-white/95">
+        <div class="text-2xl mb-1">🌊 ⏰ 🏝️</div>
+        <h2 class="text-base font-black text-sky-950 pixel-font mb-1 tracking-wider uppercase">
+          WHEN SHOULD WE CONNECT?
+        </h2>
+        <p class="text-xs text-sky-900 mb-4 font-bold">安妮幾點有空？小狗準時上線報到！</p>
+
+        <div class="space-y-3.5 text-left text-xs">
+          <!-- Time Selection -->
+          <div>
+            <label class="block pixel-font text-[10px] text-sky-950 mb-1 font-bold">
+              ⏰ 約定時間 TIME
+            </label>
+            <input type="time" id="timeInput" value="22:30" class="w-full p-2.5 bg-sky-50 border-2 border-[#0284c7] rounded-lg text-sm text-sky-950 font-bold focus:outline-none focus:ring-2 focus:ring-sky-400">
+          </div>
+
+          <!-- Date -->
+          <div>
+            <label class="block pixel-font text-[10px] text-sky-950 mb-1 font-bold">
+              🗓️ 約定日期 DATE
+            </label>
+            <input type="date" id="dateInput" class="w-full p-2.5 bg-sky-50 border-2 border-[#0284c7] rounded-lg text-sm text-sky-950 font-bold focus:outline-none focus:ring-2 focus:ring-sky-400">
+          </div>
+
+          <!-- Note -->
+          <div>
+            <label class="block pixel-font text-[10px] text-sky-950 mb-1 font-bold">
+              💌 給男友的指令 / 願望小紙條
+            </label>
+            <textarea id="noteInput" rows="2" placeholder="例：今晚視訊不准比我早睡著、要帶我去海邊玩！" class="w-full p-2.5 bg-sky-50 border-2 border-[#0284c7] rounded-lg text-xs text-sky-950 font-bold focus:outline-none focus:ring-2 focus:ring-sky-400 resize-none"></textarea>
+          </div>
+        </div>
+
+        <div class="mt-5 flex flex-col gap-2">
+          <button onclick="onConfirmDate()" class="pixel-btn pixel-btn-ocean rounded-xl py-3 px-4 text-xs font-bold tracking-wider">
+            CONFIRM OUR PLAN 💖
+          </button>
+          <button onclick="switchStep(2)" class="text-[11px] text-sky-800 font-bold underline mt-1 py-1">
+            ← 回上一頁重新挑選方案
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- STEP 4: Voucher & LINE Sharing               -->
+    <!-- ============================================ -->
+    <section id="step4" class="w-full hidden flex-col items-center text-center transition-all duration-300">
+      
+      <div class="pixel-box rounded-2xl p-5 w-full bg-white relative overflow-hidden">
+        
+        <!-- Stamp Badge -->
+        <div class="absolute -top-3 -right-3 transform rotate-12 bg-sky-600 text-white font-black text-[9px] pixel-font px-4 py-1 border-2 border-[#0369a1] shadow-md">
+          VIP QUEEN 👑
+        </div>
+
+        <div class="text-3xl my-1 animate-bounce">
+          🐶 🌊 🏝️ 🐚
+        </div>
+
+        <h2 class="text-base font-black text-sky-800 pixel-font mb-0.5 uppercase">
+          PERFECT DATE LOCKED IN!
+        </h2>
+        <p class="text-xs text-sky-950 font-bold mb-3">陪伴契約正式生效！忠犬 24H 隨傳隨到！🥰</p>
+
+        <!-- Maldives Voucher Ticket Card -->
+        <div class="bg-gradient-to-b from-sky-50 to-cyan-50 border-2 border-dashed border-[#0284c7] rounded-xl p-3.5 text-left mb-3.5 text-xs space-y-1.5 shadow-inner">
+          <div class="flex justify-between border-b border-sky-200 pb-1">
+            <span class="font-bold text-gray-500">專屬女王：</span>
+            <span class="font-black text-sky-900 text-sm">林安妮 (全世界最可愛) 👑</span>
+          </div>
+
+          <div class="flex justify-between border-b border-sky-200 pb-1">
+            <span class="font-bold text-gray-500">約定時間：</span>
+            <span id="ticketTime" class="font-bold text-sky-950">今晚 22:30</span>
+          </div>
+
+          <div class="border-b border-sky-200 pb-1">
+            <span class="font-bold text-gray-500 block mb-1">安妮指定陪伴模式：</span>
+            <div id="ticketActivities" class="flex flex-wrap gap-1"></div>
+          </div>
+
+          <div>
+            <span class="font-bold text-gray-500 block mb-0.5">女王聖旨備註：</span>
+            <p id="ticketNote" class="text-sky-950 font-bold italic bg-white p-2 rounded border border-sky-200 text-[11px]">
+              無
+            </p>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col gap-2">
+          <!-- Copy to LINE button -->
+          <button id="copyLineBtn" onclick="copyDateForLine()" class="pixel-btn pixel-btn-emerald rounded-xl py-3 px-3 text-xs font-bold tracking-wider flex items-center justify-center gap-1.5 shadow">
+            <span>💬</span>
+            <span id="copyBtnText">複製陪伴契約 傳 LINE 給男友！</span>
+          </button>
+
+          <!-- Restart button -->
+          <button onclick="resetFlow()" class="pixel-btn pixel-btn-sand rounded-xl py-2 px-3 text-[10px] text-gray-600 mt-1">
+            🔄 重新玩一次
+          </button>
+        </div>
+
+        <!-- Toast Notice -->
+        <div id="toast" class="hidden mt-2.5 text-xs bg-emerald-100 text-emerald-800 border border-emerald-300 py-1.5 px-3 rounded-lg font-bold">
+          ✅ 已複製！快去 LINE 貼上傳給男友領取陪伴～
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Bottom Beach Wave Graphic -->
+  <div class="maldives-beach-waves"></div>
+
+  <!-- ==================================================== -->
+  <!-- CORNER EASTER EGG TAG: 「林小妮」專屬預留席 (角落小彩蛋) -->
+  <!-- ==================================================== -->
+  <div onclick="triggerDaughterEasterEgg()" class="secret-daughter-tag" title="點我有秘密！">
+    <span>🍼</span>
+    <span>林小妮的小秘密</span>
+    <span class="text-[9px] bg-sky-100 text-sky-800 px-1 rounded-full">點我</span>
+  </div>
+
+  <!-- ==================================================== -->
+  <!-- EASTER EGG MODAL: 未來女兒「林小妮」吃醋打鬧專屬彈窗     -->
+  <!-- ==================================================== -->
+  <div id="daughterEggModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex-col items-center justify-center p-4">
+    <div class="pixel-box w-full max-w-xs bg-gradient-to-b from-sky-50 via-cyan-50 to-amber-50 p-5 rounded-2xl text-center relative border-4 border-[#0284c7] shadow-2xl">
+      
+      <!-- Close Button -->
+      <button onclick="closeDaughterEasterEgg()" class="absolute top-2 right-2 w-7 h-7 bg-sky-200 hover:bg-sky-300 border-2 border-[#0284c7] rounded-full text-xs font-bold text-sky-950 flex items-center justify-center">
+        ✕
+      </button>
+
+      <!-- Badge -->
+      <div class="inline-block bg-sky-600 text-white pixel-font text-[9px] font-black px-2.5 py-1 rounded-full border border-sky-800 mb-2">
+        🍼 FUTURE DAUGHTER SECRET 🍼
+      </div>
+
+      <div class="text-3xl mb-1">👶🍼🏝️</div>
+      
+      <h3 class="text-lg font-black text-sky-950 cute-font mb-1 leading-tight">
+        ⚠️ 警告！偵測到未來女兒<br>「林小妮」專屬預留席！
+      </h3>
+
+      <div class="bg-white/95 border-2 border-dashed border-sky-400 rounded-xl p-3 text-left space-y-2 mb-3 shadow-inner text-xs">
+        <p class="font-bold text-sky-950 leading-relaxed">
+          📢 <span class="text-sky-700 font-black">安妮媽媽不要吃醋！請冷靜！</span><br>
+          雖然我們未來女兒叫「林小妮」，但妳永遠是家裡最大、最寵的老婆大王！🤣💕
+        </p>
+        <div class="border-t border-sky-200 pt-1.5 space-y-1 text-[11px] text-sky-900 font-semibold">
+          <p>📜 <strong>狗男友立誓保證：</strong></p>
+          <p>1. 就算將來有了林小妮，<strong>林安妮永遠是家裡第一順位</strong>！</p>
+          <p>2. 小妮出生後我絕對不敢偏心，換尿布、泡奶、哄睡我全包！</p>
+          <p>3. 安妮媽媽只負責貌美如花，一定帶妳去馬爾地夫度假看海！🏖️</p>
+        </div>
+      </div>
+
+      <!-- Action Button for Annie -->
+      <button onclick="acceptPromise()" class="pixel-btn pixel-btn-ocean rounded-xl py-2.5 px-4 text-xs font-black w-full shadow-md">
+        安妮媽媽審核通過 😤💖
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* ====================================================
+     * 1. 8-Bit Web Audio Synthesizer
+     * ==================================================== */
+    let audioContext = null;
+    let soundMuted = false;
+
+    function getAudioContext() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+      return audioContext;
+    }
+
+    function playTone(freq, type = 'square', duration = 0.1, delay = 0) {
+      if (soundMuted) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+
+        gain.gain.setValueAtTime(0.08, ctx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + duration);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + duration);
+      } catch (err) {}
+    }
+
+    const sfx = {
+      click: () => playTone(520, 'sine', 0.08),
+      flee: () => {
+        playTone(340, 'sawtooth', 0.05);
+        playTone(260, 'sawtooth', 0.06, 0.04);
+      },
+      select: () => {
+        playTone(587.33, 'triangle', 0.08);
+        playTone(783.99, 'triangle', 0.1, 0.06);
+      },
+      puppyBark: () => {
+        playTone(480, 'triangle', 0.09);
+        playTone(700, 'triangle', 0.14, 0.05);
+      },
+      confetti: () => {
+        const chord = [523.25, 659.25, 783.99, 1046.5];
+        chord.forEach((n, i) => playTone(n, 'triangle', 0.18, i * 0.09));
+      },
+      babyGiggle: () => {
+        const notes = [659, 784, 987, 1318];
+        notes.forEach((f, i) => playTone(f, 'sine', 0.12, i * 0.07));
+      }
+    };
+
+    function toggleAudio() {
+      soundMuted = !soundMuted;
+      document.getElementById('soundIcon').textContent = soundMuted ? '🔇' : '🔊';
+      document.getElementById('soundText').textContent = soundMuted ? 'MUTED' : 'SFX ON';
+      if (!soundMuted) sfx.click();
+    }
+
+    /* ====================================================
+     * 2. Ocean Bubble Simulation Canvas
+     * ==================================================== */
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let bubbles = [];
+
+    function resizeBg() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeBg);
+    resizeBg();
+
+    class OceanBubble {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + 20;
+        this.radius = Math.random() * 6 + 3;
+        this.speedY = Math.random() * 1.3 + 0.6;
+        this.speedX = (Math.random() - 0.5) * 0.7;
+        this.opacity = Math.random() * 0.4 + 0.25;
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        if (this.y < -30) this.reset();
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(this.x - this.radius * 0.35, this.y - this.radius * 0.35, this.radius * 0.25, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 28; i++) {
+      const b = new OceanBubble();
+      b.y = Math.random() * canvas.height;
+      bubbles.push(b);
+    }
+
+    function renderBg() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      bubbles.forEach(b => {
+        b.update();
+        b.draw();
+      });
+      requestAnimationFrame(renderBg);
+    }
+    renderBg();
+
+    /* ====================================================
+     * 3. App State & Step Flow
+     * ==================================================== */
+    const appState = {
+      queenName: "林安妮",
+      futureDaughter: "林小妮",
+      noCount: 0,
+      yesScale: 1,
+      selectedActivities: [],
+      date: "",
+      time: "22:30",
+      note: ""
+    };
+
+    const today = new Date();
+    document.getElementById('dateInput').value = today.toISOString().split('T')[0];
+
+    function switchStep(stepNum) {
+      sfx.click();
+      for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById(`step${i}`);
+        if (i === stepNum) {
+          el.classList.remove('hidden');
+          el.classList.add('flex');
+        } else {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ====================================================
+     * 4. The Runaway "No" Button
+     * ==================================================== */
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+
+    const runawayQuotesForAnnie = [
+      "No 哼生氣 💢",
+      "小狗給妳摸肚皮！🐶",
+      "不要生氣了嘛🥺",
+      "林安妮大人饒命～🙇‍♂️",
+      "我發誓帶妳去馬爾地夫看海！🏝️",
+      "罰我汪汪叫逗妳開心！",
+      "安妮最心軟最美了～💖",
+      "只能按 YES 啦！",
+      "小狗搖尾巴拜託拜託！🐾",
+      "快點 YES 領取忠犬一隻！"
+    ];
+
+    function runawayNo() {
+      sfx.flee();
+      appState.noCount++;
+
+      appState.yesScale = Math.min(appState.yesScale + 0.16, 2.25);
+      yesBtn.style.transform = `scale(${appState.yesScale})`;
+      yesBtn.classList.add('shadow-xl', 'animate-pulse');
+
+      const quoteIndex = Math.min(appState.noCount, runawayQuotesForAnnie.length - 1);
+      noBtn.innerText = runawayQuotesForAnnie[quoteIndex];
+
+      const maxOffset = Math.min(window.innerWidth * 0.32, 110);
+      const randX = (Math.random() - 0.5) * (maxOffset * 2);
+      const randY = (Math.random() - 0.5) * 160;
+
+      noBtn.style.transform = `translate(${randX}px, ${randY}px) scale(${Math.max(0.72, 1 - appState.noCount * 0.04)})`;
+    }
+
+    noBtn.addEventListener('mouseenter', runawayNo);
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      runawayNo();
+    });
+    noBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      runawayNo();
+    });
+
+    /* ====================================================
+     * 5. YES Button Handler
+     * ==================================================== */
+    function onYesClicked() {
+      sfx.confetti();
+
+      confetti({
+        particleCount: 85,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#0284c7', '#2dd4bf', '#bae6fd', '#ffffff', '#fef08a']
+      });
+
+      setTimeout(() => {
+        confetti({
+          particleCount: 50,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ['#06b6d4', '#0ea5e9', '#38bdf8']
+        });
+        confetti({
+          particleCount: 50,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ['#06b6d4', '#0ea5e9', '#38bdf8']
+        });
+      }, 200);
+
+      setTimeout(() => {
+        switchStep(2);
+      }, 650);
+    }
+
+    /* ====================================================
+     * 6. Activity Selection & Locking
+     * ==================================================== */
+    function toggleActivity(card) {
+      sfx.select();
+      card.classList.toggle('selected');
+
+      const title = card.querySelector('.pixel-font').textContent.trim();
+      const subtitle = card.querySelector('span:last-child').textContent.trim();
+      const itemText = `${title} (${subtitle})`;
+
+      if (card.classList.contains('selected')) {
+        if (!appState.selectedActivities.includes(itemText)) {
+          appState.selectedActivities.push(itemText);
+        }
+      } else {
+        appState.selectedActivities = appState.selectedActivities.filter(a => a !== itemText);
+      }
+
+      const notice = document.getElementById('selectionNotice');
+      if (appState.selectedActivities.length > 0) {
+        notice.classList.add('opacity-0');
+      }
+    }
+
+    function onLockInActivities() {
+      const customVal = document.getElementById('customActivityInput').value.trim();
+      if (customVal && !appState.selectedActivities.includes(`💡 ${customVal}`)) {
+        appState.selectedActivities.push(`💡 ${customVal}`);
+      }
+
+      if (appState.selectedActivities.length === 0) {
+        sfx.flee();
+        const notice = document.getElementById('selectionNotice');
+        notice.classList.remove('opacity-0');
+        return;
+      }
+      sfx.select();
+      switchStep(3);
+    }
+
+    /* ====================================================
+     * 7. Confirm Schedule & Generate Final Voucher
+     * ==================================================== */
+    function onConfirmDate() {
+      const dateVal = document.getElementById('dateInput').value;
+      const timeVal = document.getElementById('timeInput').value;
+      const noteVal = document.getElementById('noteInput').value.trim();
+
+      appState.date = dateVal;
+      appState.time = timeVal;
+      appState.note = noteVal;
+
+      document.getElementById('ticketTime').textContent = `${dateVal || '今晚'} ${timeVal}`;
+      document.getElementById('ticketNote').textContent = noteVal ? `「${noteVal}」` : "（全聽林安妮女王的差遣吩咐！）";
+
+      const container = document.getElementById('ticketActivities');
+      container.innerHTML = '';
+      appState.selectedActivities.forEach(item => {
+        const tag = document.createElement('span');
+        tag.className = 'inline-block bg-sky-100 text-sky-900 border border-sky-300 rounded px-2 py-0.5 text-[10px] m-0.5 font-bold';
+        tag.textContent = item;
+        container.appendChild(tag);
+      });
+
+      sfx.confetti();
+      confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.5 },
+        colors: ['#0284c7', '#2dd4bf', '#fef08a']
+      });
+
+      switchStep(4);
+    }
+
+    /* ====================================================
+     * 8. Copy to LINE Format Helper
+     * ==================================================== */
+    function copyDateForLine() {
+      sfx.click();
+      const lineMessage = `🌊【林安妮專屬：小狗陪伴契約】🏝️
+👑 唯一女王：林安妮 (全世界最可愛的女友)
+⏰ 約定陪伴時間：${appState.date} ${appState.time}
+✨ 安妮選定的陪伴模式：
+${appState.selectedActivities.map(a => ` • ${a}`).join('\n')}
+💌 女王聖旨：${appState.note || '準時上線報到，不准分心！'}
+
+🌊 忠犬已蓋爪印畫押：原諒我啦，時間一到準時報到搖尾巴～🐶❤️`;
+
+      const dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = lineMessage;
+      dummy.select();
+      try {
+        document.execCommand("copy");
+        const toast = document.getElementById('toast');
+        const btnText = document.getElementById('copyBtnText');
+        toast.classList.remove('hidden');
+        btnText.textContent = "已複製！快去 LINE 貼上！";
+        setTimeout(() => {
+          toast.classList.add('hidden');
+          btnText.textContent = "複製陪伴契約 傳 LINE 給男友！";
+        }, 3500);
+      } catch (err) {}
+      document.body.removeChild(dummy);
+    }
+
+    /* ====================================================
+     * 9. Easter Egg: 未來女兒「林小妮」專屬彈窗
+     * ==================================================== */
+    function triggerDaughterEasterEgg() {
+      sfx.babyGiggle();
+      confetti({
+        particleCount: 65,
+        spread: 75,
+        origin: { y: 0.7 },
+        colors: ['#38bdf8', '#bae6fd', '#fde047', '#0284c7']
+      });
+      document.getElementById('daughterEggModal').classList.remove('hidden');
+      document.getElementById('daughterEggModal').classList.add('flex');
+    }
+
+    function closeDaughterEasterEgg() {
+      sfx.click();
+      document.getElementById('daughterEggModal').classList.add('hidden');
+      document.getElementById('daughterEggModal').classList.remove('flex');
+    }
+
+    function acceptPromise() {
+      sfx.confetti();
+      confetti({
+        particleCount: 80,
+        spread: 80,
+        origin: { y: 0.5 },
+        colors: ['#0284c7', '#2dd4bf', '#fbbf24']
+      });
+      closeDaughterEasterEgg();
+    }
+
+    function puppyTapped() {
+      sfx.puppyBark();
+      confetti({
+        particleCount: 18,
+        spread: 45,
+        origin: { y: 0.35 },
+        colors: ['#38bdf8', '#fef08a', '#fb7185']
+      });
+    }
+
+    /* ====================================================
+     * 10. Reset Flow
+     * ==================================================== */
+    function resetFlow() {
+      sfx.click();
+      appState.noCount = 0;
+      appState.yesScale = 1;
+      appState.selectedActivities = [];
+      yesBtn.style.transform = `scale(1)`;
+      yesBtn.classList.remove('animate-pulse');
+      noBtn.style.transform = `none`;
+      noBtn.innerText = "No 哼生氣 💢";
+      document.querySelectorAll('.activity-card').forEach(c => c.classList.remove('selected'));
+      document.getElementById('customActivityInput').value = "";
+      document.getElementById('noteInput').value = "";
+      switchStep(1);
+    }
+  </script>
+</body>
+</html>
